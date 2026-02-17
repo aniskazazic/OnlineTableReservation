@@ -1,0 +1,19 @@
+<app-admin-sidebar></app-admin-sidebar>
+
+<h2 *ngIf="categoryId!=0">Edit Category</h2>
+<h2 *ngIf="categoryId==0">Add new Category</h2>
+
+<form (ngSubmit)="saveCategory()">
+  <div>
+    <label for="name">Category Name:</label>
+    <input [(ngModel)]="category.name" id="name" name="name" required />
+  </div>
+
+  <div>
+    <label for="description">Description:</label>
+    <input [(ngModel)]="category.description" id="description" name="description" />
+  </div>
+
+  <button type="submit">Save Changes</button>
+  <button routerLink="/admin/categories" type="button">Cancel</button>
+</form>

@@ -1,0 +1,80 @@
+.user-table{
+  margin-left: 190px;
+}
+
+
+.dashboard-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.dashboard-header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+
+.user-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.user-table th, .user-table td {
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+}
+.status-active {
+  color: green;
+}
+.status-inactive {
+  color: red;
+}
+.pagination {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+input {
+  width: 100px;
+}
+.mail{
+  width: 200px;
+}
+
+.user-input{
+  width: 300px;
+}
+
+.user-input,
+.user-checkbox {
+  margin: 8px 12px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.user-input:focus {
+  outline: none;
+  border-color: #3f51b5;
+  box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.2);
+}
+
+.user-checkbox {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+/* Optional label next to checkbox */
+.user-checkbox + label {
+  font-size: 14px;
+  margin-left: 6px;
+  cursor: pointer;
+}
+

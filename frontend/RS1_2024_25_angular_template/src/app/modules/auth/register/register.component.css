@@ -1,0 +1,296 @@
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  background-color: #f6f6f7;
+  color: #333333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.language-selector {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+}
+
+.language-selector label {
+  margin-right: 10px;
+  color: #333333;
+  font-weight: 500;
+}
+
+.language-selector select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #e1e1e1;
+  background-color: #ffffff;
+  color: #333333;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.language-selector select:focus {
+  border-color: #1eaedb;
+  box-shadow: 0 0 0 2px rgba(30, 174, 219, 0.2);
+}
+
+.All-Register {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.register-container {
+  background-color: #ffffff;
+  padding: 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+}
+
+.owner-checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 10px 0 10px 15px; /* malo lijevo poravnanje kao i label */
+  gap: 8px;
+}
+
+.owner-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #1eaedb; /* moderni browseri podržavaju */
+  cursor: pointer;
+}
+
+.owner-checkbox label {
+  font-size: 15px;
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+
+.register-container h2 {
+  color: var(--primary-blue);
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #333333;
+  text-align: left;
+  margin-left: 15px;
+}
+
+input {
+  width: 85%;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border: 1px solid #e1e1e1;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #333333;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #1eaedb;
+  box-shadow: 0 0 0 2px rgba(30, 174, 219, 0.2);
+}
+
+.password-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.password-wrapper input {
+  width: 85%;
+  padding-right: 40px;
+  margin-bottom: 0;
+}
+
+.toggle-icon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666666;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggle-icon:hover {
+  color: #1eaedb;
+}
+
+.strength-meter {
+  height: 4px;
+  background-color: #e1e1e1;
+  margin: 8px 0 4px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.strength-bar {
+  height: 100%;
+  width: 0;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+
+.strength-bar.weak {
+  width: 25%;
+  background-color: red;
+}
+
+.strength-bar.fair {
+  width: 50%;
+  background-color: #ff9900;
+}
+
+.strength-bar.good {
+  width: 75%;
+  background-color: #ffcc00;
+}
+
+.strength-bar.strong {
+  width: 100%;
+  background-color: #2ecc71;
+}
+
+.strength-text {
+  font-size: 12px;
+  text-align: left;
+  margin: 0 0 16px;
+  color: #666666;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 1.5rem 0;
+}
+
+.button1, .button2, .button3 {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button1 {
+  background-color: #e1e1e1;
+  color: #333333;
+}
+
+.button2, .button3 {
+  background-color: #1eaedb;
+  color: #ffffff;
+}
+
+.button1:hover:not(:disabled),
+.button2:hover:not(:disabled),
+.button3:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.button1:hover:not(:disabled) {
+  background-color: #d4d4d4;
+}
+
+.button2:hover:not(:disabled),
+.button3:hover:not(:disabled) {
+  background-color: #0FA0CE;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.register-container ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 1rem;
+  text-align: left;
+}
+
+.register-container ul li {
+  color: #e74c3c;
+  font-size: 14px;
+  margin-bottom: 4px;
+  padding-left: 16px;
+  position: relative;
+}
+
+.register-container ul li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+}
+
+.register-container p {
+  margin-top: 1rem;
+  color: #666666;
+  font-size: 14px;
+}
+
+.auth-link {
+  color: #1eaedb;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.auth-link:hover {
+  color: #0FA0CE;
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .register-container {
+    padding: 1.5rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+
+  .button1, .button2, .button3 {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+}

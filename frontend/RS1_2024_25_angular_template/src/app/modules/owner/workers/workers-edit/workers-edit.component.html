@@ -1,0 +1,90 @@
+<app-sidebar></app-sidebar>
+
+<h2 *ngIf="workerId!=0">Edit Worker</h2>
+<h2 *ngIf="workerId==0">Add New Worker</h2>
+
+<form [formGroup]="form" (ngSubmit)="saveWorker()">
+  <div>
+    <label>First Name:</label>
+    <input formControlName="firstName" />
+    <div *ngIf="form.get('firstName')?.touched && form.get('firstName')?.invalid" class="error">
+      Morate unijeti ime.
+    </div>
+  </div>
+
+  <div>
+    <label>Last Name:</label>
+    <input formControlName="lastName" />
+    <div *ngIf="form.get('lastName')?.touched && form.get('lastName')?.invalid" class="error">
+      Morate unijeti prezime.
+    </div>
+  </div>
+
+  <div>
+    <label>Email:</label>
+    <input formControlName="email" type="email" />
+    <div *ngIf="form.get('email')?.touched && form.get('email')?.errors?.['required']" class="error">
+      Morate unijeti email.
+    </div>
+    <div *ngIf="form.get('email')?.touched && form.get('email')?.errors?.['email']" class="error">
+      Neispravan email format.
+    </div>
+  </div>
+
+  <div>
+    <label>Username:</label>
+    <input formControlName="username" />
+    <div *ngIf="form.get('username')?.touched && form.get('username')?.invalid" class="error">
+      Morate unijeti korisničko ime.
+    </div>
+  </div>
+
+  <div>
+    <label>Password:</label>
+    <div style="position: relative;">
+      <input
+        [type]="passwordVisible ? 'text' : 'password'"
+        formControlName="password"
+        [placeholder]="workerId != 0 ? 'Ostavi prazno ako ne želiš promijeniti' : ''"
+      />
+      <div>
+        <i
+          class="toggle-icon"
+          [class.fas]="true"
+          [class.fa-eye]="!passwordVisible"
+          [class.fa-eye-slash]="passwordVisible"
+          (click)="togglePasswordVisibility()"
+        ></i>
+      </div>
+    </div>
+
+
+
+    <div *ngIf="form.get('password')?.touched && form.get('password')?.invalid" class="error">
+      <div *ngIf="form.get('password')?.errors?.['minlength']">
+        Lozinka mora imati barem 6 karaktera.
+      </div>
+    </div>
+  </div>
+
+
+
+  <div>
+    <label>Phone number:</label>
+    <input formControlName="phoneNumber" />
+    <div *ngIf="form.get('phoneNumber')?.touched && form.get('phoneNumber')?.invalid" class="error">
+      Morate unijeti broj telefona.
+    </div>
+  </div>
+
+  <div>
+    <label>Birth Date:</label>
+    <input formControlName="birthDate" type="date" />
+    <div *ngIf="form.get('birthDate')?.touched && form.get('birthDate')?.invalid" class="error">
+      Morate unijeti datum rođenja.
+    </div>
+  </div>
+
+  <button type="submit">Spasi</button>
+  <button type="button" [routerLink]="['/owner/workers', this.localeId]">Otkaži</button>
+</form>

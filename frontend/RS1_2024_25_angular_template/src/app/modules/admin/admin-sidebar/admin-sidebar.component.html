@@ -1,0 +1,61 @@
+<div class="sidebar">
+  <ul class="sidebar-list">
+    <li class="sidebar-item" (click)="toDashBoard()" >
+      <div class="sidebar-icon">
+        <i class="icon">📊</i>
+      </div>
+      <span class="sidebar-label">Dashboard</span>
+    </li>
+    <li class="sidebar-item" (click)="toAnalytics()" >
+      <div class="sidebar-icon">
+        <i class="icon">📈</i>
+      </div>
+      <span class="sidebar-label">Analytics</span>
+    </li>
+    <li class="sidebar-item" (click)="toUser()" >
+      <div class="sidebar-icon">
+        <i class="icon">👤</i>
+      </div>
+      <span class="sidebar-label">Users</span>
+    </li>
+    <li class="sidebar-item" (click)="toLocale()" >
+      <div class="sidebar-icon">
+        <i class="icon">📍</i>
+      </div>
+      <span class="sidebar-label">Locales</span>
+    </li>
+    <li class="sidebar-item" (click)="toCiteies()">
+      <div class="sidebar-icon">
+        <i class="icon">🏙️</i>
+      </div>
+      <span class="sidebar-label">Cities</span>
+    </li>
+    <li class="sidebar-item" (click)="toCountries()">
+      <div class="sidebar-icon">
+        <i class="icon">🌍</i>
+      </div>
+      <span class="sidebar-label">Countries</span>
+    </li>
+
+    <li class="sidebar-item" (click)="toCategory()">
+      <div class="sidebar-icon">
+        <i class="icon">📑</i>
+      </div>
+      <span class="sidebar-label">Category</span>
+    </li>
+  </ul>
+
+  <div class="logout-container" (click)="Logout()">
+    <div class="btn-logout">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+        <polyline points="16 17 21 12 16 7"></polyline>
+        <line x1="21" x2="9" y1="12" y2="12"></line>
+      </svg>
+    </div>
+    <span class="sidebar-label">Log out</span>
+  </div>
+
+</div>

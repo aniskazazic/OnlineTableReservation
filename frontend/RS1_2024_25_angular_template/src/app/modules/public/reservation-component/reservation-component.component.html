@@ -1,0 +1,96 @@
+<!-- Container for tables -->
+<app-sidebar></app-sidebar>
+<div class="center-wrapper">
+  <div #box class="example-boundary">
+    <!-- Loop through tables and render each as an SVG -->
+    <div class="resizable-table" *ngFor="let table of tables; let i = index"
+            [style.left.px]="table.xCoordinate"
+            [style.top.px]="table.yCoordinate"
+
+         (click)="openModal(table)"
+    >
+
+
+      <div >
+        <img *ngIf="tables[i].numberOfGuests===2" src="images/2Seat.png" style="width: 100%; height: 100%; object-fit: contain;" />
+        <img *ngIf="tables[i].numberOfGuests===3" src="images/3Seat.png" style="width: 100%; height: 100%; object-fit: contain;" />
+        <img *ngIf="tables[i].numberOfGuests===4" src="images/4Seat.png" style="width: 100%; height: 100%; object-fit: contain;" />
+        <img *ngIf="tables[i].numberOfGuests===5" src="images/5Seat.png" style="width: 100%; height: 100%; object-fit: contain;" />
+        <img *ngIf="tables[i].numberOfGuests===6" src="images/6Seat.png" style="width: 100%; height: 100%; object-fit: contain;" />
+        <img *ngIf="tables[i].numberOfGuests===7" src="images/7Seat.png" style="width: 100%; height: 100%; object-fit: contain;" />
+        <img *ngIf="tables[i].numberOfGuests===8" src="images/8Seat.png" style="width: 100%; height: 100%; object-fit: contain;" />
+
+      </div>
+      </div>
+    <div
+      *ngFor="let zone of zones; let i = index"
+      class="zone-box"
+      [style.left.px]="zone.xCoordinate"
+      [style.top.px]="zone.yCoordinate"
+      [style.width.px]="zone.width"
+      [style.height.px]="zone.height">
+      {{ zone.name }}
+    </div>
+    </div>
+
+  </div>
+
+
+
+<!-- MODAL -->
+<div class="zone-modal" *ngIf="modalOpen">
+  <div class="modal-content">
+    <h2>Reserve “{{ selectedTable?.name }}”</h2>
+
+    <label>
+      Date:
+      <input
+        type="date"
+        [min]="minDate"
+        [(ngModel)]="selectedDate"
+        (change)="onDateChange()"
+      />
+    </label>
+
+    <label *ngIf="availableSlots.length">
+      Time slot:
+      <select [(ngModel)]="selectedSlot">
+        <option
+          *ngFor="let slot of availableSlots"
+          [ngValue]="slot"
+        >
+          {{ slot.start }} – {{ slot.end }}
+        </option>
+      </select>
+    </label>
+    <p *ngIf="!availableSlots.length">No slots available.</p>
+
+    <div class="modal-buttons">
+      <button (click)="openReserveModal()">Reserve</button>
+      <button class="secondary" (click)="closeModal()">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="zone-modal" *ngIf="confirmModalOpen==true">
+  <div class="modal-content">
+    <h2>Confirm Reservation</h2>
+    <p>
+      Are you sure you want to reserve table <strong>“{{ selectedTable?.name }}”</strong><br>
+      on <strong>{{ selectedDate }}</strong> from <strong>{{ selectedSlot?.start }}</strong> to <strong>{{ selectedSlot?.end }}</strong>?
+    </p>
+    <div class="modal-buttons">
+      <button (click)="reserve()">Confirm</button>
+      <button class="secondary" (click)="cancelConfirmation()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+

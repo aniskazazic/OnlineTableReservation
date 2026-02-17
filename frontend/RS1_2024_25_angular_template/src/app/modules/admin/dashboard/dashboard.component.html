@@ -1,0 +1,77 @@
+<app-admin-sidebar></app-admin-sidebar>
+<html lang="en">
+
+<div class="language-selector">
+  <label for="language">{{ 'SELECT.LAN' | translate }}:</label>
+  <select id="language" (change)="changeLanguage($event)">
+    <option value="en" [selected]="currentLang === 'en'">{{ 'ENGLISH' | translate }}</option>
+    <option value="bs" [selected]="currentLang === 'bs'">{{ 'BOSNIAN' | translate }}</option>
+  </select>
+</div>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>{{ 'ADMIN_DASHBOARD.TITLE' | translate }}</h1>
+    <p class="subtitle">{{ 'ADMIN_DASHBOARD.SUBTITLE' | translate }}</p>
+  </header>
+
+  <div class="stats-container">
+    <!-- Total Users -->
+    <div class="stat-card">
+      <div class="stat-content">
+        <div class="stat-title">{{ 'ADMIN_DASHBOARD.TOTAL_USERS' | translate }}</div>
+        <div class="stat-value">{{ stats.countOfUsers }}</div>
+        <div class="stat-description">{{ 'ADMIN_DASHBOARD.TOTAL_USERS_DESC' | translate }}</div>
+      </div>
+      <div class="stat-icon blue">
+        <i class="fas fa-user"></i>
+      </div>
+    </div>
+
+    <!-- Active Users -->
+    <div class="stat-card">
+      <div class="stat-content">
+        <div class="stat-title">{{ 'ADMIN_DASHBOARD.ACTIVE_USERS' | translate }}</div>
+        <div class="stat-value">{{ stats.countOfActiveUsers }}</div>
+        <div class="stat-description">{{ 'ADMIN_DASHBOARD.ACTIVE_USERS_DESC' | translate }}</div>
+      </div>
+      <div class="stat-icon blue">
+        <i class="fas fa-user-check"></i>
+      </div>
+    </div>
+
+    <!-- Deleted Users -->
+    <div class="stat-card">
+      <div class="stat-content">
+        <div class="stat-title">{{ 'ADMIN_DASHBOARD.DELETED_USERS' | translate }}</div>
+        <div class="stat-value">{{ stats.countOfDeletedUsers }}</div>
+        <div class="stat-description">{{ 'ADMIN_DASHBOARD.DELETED_USERS_DESC' | translate }}</div>
+      </div>
+      <div class="stat-icon red">
+        <i class="fas fa-user-minus"></i>
+      </div>
+    </div>
+
+    <!-- Locales -->
+    <div class="stat-card">
+      <div class="stat-content">
+        <div class="stat-title">{{ 'ADMIN_DASHBOARD.LOCALES' | translate }}</div>
+        <div class="stat-value">{{ stats.countOfLocales }}</div>
+        <div class="stat-description">{{ 'ADMIN_DASHBOARD.LOCALES_DESC' | translate }}</div>
+      </div>
+      <div class="stat-icon gold">
+        <i class="fas fa-utensils"></i>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

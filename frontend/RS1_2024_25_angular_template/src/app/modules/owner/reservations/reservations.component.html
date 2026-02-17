@@ -1,0 +1,93 @@
+<app-sidebar></app-sidebar>
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <div class="header-content">
+      <div class="header-title-container">
+        <h1 class="header-title">Restaurant Owner Dashboard</h1>
+        <p class="header-subtitle">Manage your reservations, tables, and staff</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <div class="tabs-container">
+      <div class="tabs-border">
+        <nav class="tabs-nav">
+          <button class="tab-button " (click)="toLocaleOverview()">Overview</button>
+          <button  class="tab-button tab-active"  >Reservations</button>
+          <button *ngIf="localeId !== 0" class="tab-button" [routerLink]="['/public/tablelayout', localeId]"  >Tables</button>
+          <button class="tab-button" (click)="toWorkers()">Workers</button>
+          <button class="tab-button" (click)="toSettings()">Settings</button>
+        </nav>
+      </div>
+    </div>
+
+    <div class="dashboard-content">
+
+
+        <div class="container">
+          <div class="header">
+            <h1>Upcoming Reservations</h1>
+            <p>Manage all your upcoming reservations</p>
+            <div class="search-container">
+              <input  (keyup)="applyFilter($event)" placeholder="Search reservations..." class="search-input">
+              <input type="date" [value]="selectedDate" (change)="onDateChange($event)" class="date-picker" placeholder="dd.MM.yyyy"/>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="reservations-table">
+              <thead>
+              <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Guests</th>
+                <th>Table</th>
+                <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let reservation of reservations">
+                <td>{{ reservation.firstName }} {{ reservation.lastName }}</td>
+                <td>{{ reservation.reservationDate | date: 'dd.MM.yyyy' }}</td>
+                <td>{{ reservation.startTime }}</td>
+                <td>{{ reservation.guests }}</td>
+                <td>{{ reservation.tableName }}</td>
+                <td class="actions">
+                  <button (click)="openCancelModal(reservation.id)"  class="cancel-btn">Cancel</button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="pagination-controls" *ngIf="totalCount > 0">
+            <button
+              (click)="prevPage()"
+              [disabled]="currentPage === 1 || totalPages <= 1">Previous
+            </button>
+            <span>Page {{ currentPage }} of {{ totalPages }}</span>
+            <button
+              (click)="nextPage()"
+              [disabled]="currentPage === totalPages || totalPages <= 1">Next
+            </button>
+          </div>
+        </div>
+
+    </div>
+  </main>
+</div>
+
+
+<!-- Modal backdrop -->
+<div id="cancelModal" class="modal" *ngIf="showCancelModal">
+  <div class="modal-content">
+    <h2>Cancel Reservation</h2>
+    <p>Are you sure you want to cancel this reservation?</p>
+    <div class="modal-actions">
+      <button class="btn cancel" (click)="closeCancelModal()">No</button>
+      <button class="btn confirm" (click)="confirmCancel()">Yes</button>
+    </div>
+  </div>
+</div>

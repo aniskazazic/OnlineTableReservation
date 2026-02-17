@@ -1,0 +1,34 @@
+<app-admin-sidebar></app-admin-sidebar>
+<div class="All">
+  <div class="dashboard-container">
+    <div class="dashboard-header">
+      <h1>Analytics Dashboard</h1>
+      <p class="description">View key metrics about your platform's performance and user engagement</p>
+    </div>
+
+
+<div class="charts-grid">
+  <div class="chart-container">
+    <div class="canvas">
+    <h3>Active vs Deleted Users</h3>
+    <canvas baseChart [data]="userStatusData" [type]="'doughnut'"></canvas>
+    </div>
+  </div>
+
+  <div class="chart-container">
+    <h3>User Roles</h3>
+    <canvas baseChart [data]="userRoleData" [type]="'doughnut'"></canvas>
+  </div>
+
+  <div class="chart-container">
+    <h3>Locale Categories</h3>
+    <canvas baseChart [data]="localeCategoryData" [type]="'doughnut'"></canvas>
+  </div>
+
+  <div class="chart-container">
+    <h3>Locales by Country</h3>
+    <canvas baseChart [data]="localeCountryData" [type]="'doughnut'"></canvas>
+  </div>
+</div>
+</div>
+</div>

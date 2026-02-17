@@ -1,0 +1,27 @@
+
+<html lang="en">
+
+<div class="language-selector">
+  <label for="language">{{ 'SELECT.LAN' | translate }}:</label>
+  <select id="language" (change)="changeLanguage($event)">
+    <option value="en" [selected]="currentLang === 'en'">{{ 'ENGLISH' | translate }}</option>
+    <option value="bs" [selected]="currentLang === 'bs'">{{ 'BOSNIAN' | translate }}</option>
+  </select>
+</div>
+
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restaurant Admin Portal</title>
+</head>
+<body>
+<div class="container">
+  <h1>{{ 'ADMINWELCOME.TITLE' | translate }}</h1>
+  <p>{{ 'ADMINWELCOME.WELCOME' | translate }}</p>
+  <button (click)="toAdmin()">{{ 'ADMINWELCOME.ENTER_ADMIN' | translate }}</button>
+  <button (click)="toHome()">{{ 'ADMINWELCOME.ENTER_HOME' | translate }}</button>
+</div>
+</body>
+</html>
+

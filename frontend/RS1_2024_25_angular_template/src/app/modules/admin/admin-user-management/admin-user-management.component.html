@@ -1,0 +1,61 @@
+<app-admin-sidebar></app-admin-sidebar>
+<div class="user-table">
+  <div class="dashboard-container">
+    <div class="dashboard-header">
+      <h1>User Managment</h1>
+      <p class="description">View and manage user profiles</p>
+    </div>
+    <input class="user-input" (keyup)="applyFilter($event)" matInput placeholder="Search users">
+
+    <div style="display: flex; align-items: center; gap: 8px; margin-left: 12px;">
+      <input class="user-checkbox" type="checkbox" [(ngModel)]="loadDeleted" (change)="cb()" id="deletedToggle">
+      <label for="deletedToggle">Show deleted</label>
+    </div>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Role</th><th>Status</th><th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users; let i = index">
+      <td>{{ user.id }}</td>
+
+      <td *ngIf="!editRow[i]">{{ user.firstName }} </td>
+      <td *ngIf="editRow[i]">
+        <input [(ngModel)]="user.firstName" placeholder="First Name" />
+      </td>
+
+      <td *ngIf="!editRow[i]">{{ user.lastName }}</td>
+      <td *ngIf="editRow[i]">
+        <input [(ngModel)]="user.lastName" placeholder="Last Name" />
+      </td>
+
+      <td *ngIf="!editRow[i]">{{ user.email }}</td>
+      <td *ngIf="editRow[i]"><input  class="mail"  [(ngModel)]="user.email" /></td>
+
+      <td>{{ user.isAdmin ? 'Admin' : user.isWorker ? 'Worker' : 'User' }}</td>
+      <td>
+          <span [ngClass]="user.isDeleted ? 'status-inactive' : 'status-active'">
+            {{ user.isDeleted ? 'Inactive' : 'Active' }}
+          </span>
+      </td>
+
+      <td>
+        <button *ngIf="!editRow[i]" (click)="editRow[i] = true">✏️</button>
+        <button *ngIf="editRow[i]" (click)="saveUser(user, i)">💾</button>
+        <button (click)="deleteOrReactivate(user)">
+          {{ user.isDeleted ? '♻️' : '🗑️' }}
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="page === 1">‹</button>
+    <span>Page {{ page }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="page === totalPages">›</button>
+  </div>
+</div>
+</div>

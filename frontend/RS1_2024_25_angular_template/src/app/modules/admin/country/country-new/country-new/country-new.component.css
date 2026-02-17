@@ -1,0 +1,74 @@
+.wrapper {
+  margin-left: 190px;
+  max-width: 720px;
+}
+
+.title {
+  text-align: center;
+  margin: 18px 0 14px;
+  font-weight: 700;
+}
+
+.card {
+  background: #f6f9ff;
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.06);
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+label {
+  font-weight: 600;
+}
+
+input[type="text"] {
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  background: #fff;
+}
+input[type="text"]:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .12);
+}
+
+.alert {
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+.alert.success {
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #10b981;
+}
+.alert.error {
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #ef4444;
+}
+
+.actions { display: flex; gap: 10px; }
+
+.btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color .2s ease;
+}
+.btn-primary { background: #2563eb; }
+.btn-primary:hover { background: #1e40af; }
+.btn-secondary { background: #6b7280; }
+.btn-secondary:hover { background: #4b5563; }

@@ -1,0 +1,12 @@
+# Ignore compiled and dependency files
+bin/
+obj/
+*.user
+*.suo
+*.pdb
+*.mdb
+.vscode/
+.vs/
+.idea/
+appsettings.Development.json
+

@@ -1,0 +1,53 @@
+<app-sidebar></app-sidebar>
+<div class="verify-page">
+  <div class="verify-card" *ngIf="me as o">
+    <div class="topbar">
+      <h2 class="title">Phone verification</h2>
+
+      <a class="btn ghost" routerLink="/user/settings" title="Back to settings">
+        ← Back to settings
+      </a>
+    </div>
+
+    <div class="owner-row">
+      <div class="owner-name">
+        <span class="owner-label">Owner</span>
+        <span *ngIf="verified" class="verified-badge" title="Verified"></span>
+      </div>
+
+      <div class="phone" *ngIf="o.phoneNumber">
+        <span class="phone-icon">📱</span>
+        <span class="phone-text">{{ o.phoneNumber }}</span>
+      </div>
+    </div>
+
+    <ng-container *ngIf="!verified; else doneBlock">
+      <div class="actions">
+        <button class="btn primary" (click)="sendCode()" [disabled]="loading || sent">
+          {{ sent ? 'Code sent' : (loading ? 'Sending…' : 'Send verification code') }}
+        </button>
+      </div>
+
+      <div class="code-row" *ngIf="sent">
+        <input
+          class="code-input"
+          maxlength="6"
+          [(ngModel)]="code"
+          placeholder="Enter 6-digit code"
+          autocomplete="one-time-code" />
+        <button class="btn primary" (click)="confirm()" [disabled]="loading || !code">
+          {{ loading ? 'Verifying…' : 'Verify' }}
+        </button>
+      </div>
+
+      <div class="err" *ngIf="error">{{ error }}</div>
+    </ng-container>
+
+    <ng-template #doneBlock>
+      <div class="verified-note">
+        <span class="verified-badge small"></span>
+        <span>Phone verified. Re-verification disabled.</span>
+      </div>
+    </ng-template>
+  </div>
+</div>

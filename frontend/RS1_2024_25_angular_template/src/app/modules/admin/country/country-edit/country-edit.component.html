@@ -1,0 +1,21 @@
+<app-admin-sidebar></app-admin-sidebar>
+
+<h2 *ngIf="countryId!=0">Edit Country</h2>
+<h2 *ngIf="countryId==0">Add new Country</h2>
+
+<form #f="ngForm" (ngSubmit)="updateCountry()">
+  <div>
+    <label for="name">Country Name:</label>
+    <input
+      [(ngModel)]="country.name"
+      id="name"
+      name="name"
+      required
+      minlength="2"
+      [disabled]="loading"
+    />
+  </div>
+
+  <button type="submit" [disabled]="loading || f.invalid">Save Changes</button>
+  <button type="button" (click)="cancel()">Cancel</button>
+</form>

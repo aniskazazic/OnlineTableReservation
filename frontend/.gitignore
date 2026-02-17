@@ -1,0 +1,11 @@
+# Ignore Node.js files and directories
+node_modules/
+dist/
+.angular/
+
+# Ignore logs and build files
+logs/
+*.log
+
+# Ignore Angular-specific files
+src/environments/environment*.ts

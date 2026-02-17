@@ -1,0 +1,184 @@
+{
+  "SELECT": {
+    "LAN": "Izaberi jezik"
+  },
+
+  "LANGUAGE": {
+  "BOSNIAN": "Bosanski"
+  },
+
+  "LOGINREGISTER": {
+    "TITLE": "Online Rezervacija Stolova",
+    "MESSAGE": "Molimo prijavite se ili registrirajte da nastavite",
+    "BUTTON": "Prijava",
+    "PORUKA_REG": "Još nemate račun ?",
+    "BUTTON_REG": "Registrirajte se"
+  },
+
+  "LOGIN": {
+    "USERNAME":"Korisničko ime ",
+    "TITLE": "Prijava",
+    "PASSWORD": "Šifra",
+    "BUTTON": "Prijavi se",
+    "PORUKA_REG": "Još nemate račun ?",
+    "BUTTON_REG": "Registrirajte se",
+    "ERROR": "Neispravno korisničko ime ili šifra"
+  },
+
+  "REGISTER": {
+    "TITLE": "Registracija",
+    "STEP1": {
+      "FIRST_NAME": "Ime",
+      "LAST_NAME": "Prezime"
+    },
+    "STEP2": {
+      "USERNAME": "Korisničko ime",
+      "EMAIL": "Email adresa"
+    },
+    "STEP3": {
+      "PASSWORD": "Šifra",
+      "CONFIRM_PASSWORD": "Potvrdite šifru"
+    },
+    "VALIDATION_ERRORS": {
+      "REQUIRED_FIRST_NAME": "Ime je obavezno.",
+      "REQUIRED_LAST_NAME": "Prezime je obavezno.",
+      "REQUIRED_USERNAME": "Korisničko ime je obavezno.",
+      "REQUIRED_EMAIL": "Email adresa je obavezna.",
+      "INVALID_EMAIL": "Email adresa nije validna.",
+      "REQUIRED_PASSWORD": "Šifra mora sadržavati najmanje 8 karaktera, uključujući veliko i malo slovo, broj i specijalni znak.",
+      "PASSWORD_MISMATCH": "Šifre se ne podudaraju.",
+      "GENERAL_ERROR": "Došlo je do greške prilikom registracije."
+    },
+    "BUTTONS": {
+      "PREVIOUS": "Nazad",
+      "NEXT": "Dalje",
+      "SUBMIT": "Pošalji"
+    },
+    "ALREADY_HAVE_ACCOUNT": "Već imate račun?",
+    "LOGIN_LINK": "Prijavite se"
+  },
+
+  "LOCALE_DETAILS": {
+    "CITY": "Grad",
+    "OWNER": "Vlasnik",
+    "WORKING_HOURS": "Radno vrijeme",
+    "RATING": "Ocjena",
+    "UPDATE": "Ažuriraj",
+    "DELETE": "Izbriši",
+    "ADDRESS": "Adresa",
+    "BUTTON": "Prikaži moju lokaciju i rutu",
+    "LOCATION": "Lokacija",
+    "DESCRIPTION": "Opis",
+    "ADDTOGALLERY" : "Dodaj u galeriju",
+    "BOOKATABLE" : "Rezerviši stol",
+    "GALLERY": {
+      "GALLERY": "Galerija",
+      "NO_IMAGES":"Nema dostupnih slika",
+      "SHOW": "Prikaz cijele galerije",
+      "ADD": "Dodaj u galeriju"
+    }
+  },
+
+  "REVIEW": {
+    "LEAVE_REVIEW": "Ostavite recenziju",
+    "RATING": "Ocjena",
+    "SUBMIT_REVIEW": "Pošaljite recenziju",
+    "REVIEWS": "Recenzije",
+    "EDIT_REVIEW": "Uredi recenziju",
+    "SAVE": "Spasi",
+    "CANCEL": "Otkaži",
+    "DELETE": "Izbriši",
+    "WARN": "Upozorenje !",
+    "ALRIGHT": "Uredu",
+    "WARNING": {
+      "EDIT": "Možete uređivati samo vlastite recenzije.",
+      "DELETE": "Ne možete obrisati recenziju koju niste napisali."
+    },
+    "YES": "Da",
+    "NO": "Ne",
+    "CONFIRM_DELETE": "Jeste li sigurni?",
+    "DELETE_CONFIRMATION": "Želite li stvarno izbrisati ovu recenziju?",
+    "ALREADY_REVIEWED": "Već ste ostavili recenziju za ovaj lokal.",
+    "SORTBY" : "Sortiraj po",
+    "MOSTLIKES" : "Najviše likeova",
+    "MOSTDISLIKES" : "Najviše dislikova",
+    "HIGHESTRATING": "Najveća ocjena",
+    "LOWESTRATING" : "Najmanja ocjena",
+    "LATEST" : "Najnoviji",
+    "EARLIEST" : "Najraniji"
+  },
+
+  "LOADING": "Učitavanje...",
+
+  "SHOWINGREWIEWS": "Prikaz recenzija",
+
+  "ADMINWELCOME": {
+    "TITLE": "Administratorski portal restorana",
+    "WELCOME": "Dobrodošli na administratorsku ploču. Pristupite analitici, upravljajte korisnicima i lokalima.",
+    "ENTER_ADMIN": "Uđi u administratorski panel",
+    "ENTER_HOME": "Uđi na početnu stranicu"
+  },
+
+  "WORKERWELCOME" : {
+    "TITLE": "Worker portal restorana",
+    "WELCOME": "Dobrodošli na worker ploču. Pristupite rezervacijama, upravljajte stolovima i više.",
+    "ENTER_WORKER": "Uđi u worker panel",
+    "ENTER_HOME": "Uđi na početnu stranicu"
+  },
+
+  "ADMIN_DASHBOARD": {
+    "TITLE": "Administratorska ploča",
+    "SUBTITLE": "Dobrodošli na administratorsku ploču",
+    "TOTAL_USERS": "Ukupno korisnika",
+    "TOTAL_USERS_DESC": "Ukupan broj registrovanih korisnika",
+    "ACTIVE_USERS": "Aktivni korisnici",
+    "ACTIVE_USERS_DESC": "Korisnici aktivni u posljednjih 30 dana",
+    "DELETED_USERS": "Obrisani korisnici",
+    "DELETED_USERS_DESC": "Ukupan broj obrisanih korisničkih računa",
+    "LOCALES": "Lokali",
+    "LOCALES_DESC": "Ukupan broj registrovanih restorana"
+  },
+
+
+  "ADDLOCALE": {
+    "NAME": "Naziv lokala",
+    "LOGO": "Logo",
+    "CATEGORY": "Kategorija",
+    "CITY": "Grad",
+    "ADDRESS": "Adresa",
+    "LENGTHOFRESERVATION": "Duzina trajanja rezervacije",
+    "STARTOFWORKINGHOURS": "Pocetak radnog vremena",
+    "ENDOFWORKINGHOURS": "Kraj radnog vremena",
+    "LOCALEADD": "Dodaj lokal",
+    "15MIN": "15 minuta",
+    "30MIN": "30 minuta",
+    "45MIN": "45 minuta",
+    "60MIN": "60 minuta",
+    "90MIN": "90 minuta",
+    "120MIN": "120 minuta"
+
+  },
+  "EDITLOCALE": {
+    "NAME": "Naziv lokala",
+    "CATEGORY": "Kategorija",
+    "CITY": "Grad",
+    "ADDRESS": "Adresa",
+    "LENGTHOFRESERVATION": "Duzina trajanja rezervacije",
+    "STARTOFWORKINGHOURS": "Pocetak radnog vremena",
+    "ENDOFWORKINGHOURS": "Kraj radnog vremena",
+    "15MIN": "15 minuta",
+    "30MIN": "30 minuta",
+    "45MIN": "45 minuta",
+    "60MIN": "60 minuta",
+    "90MIN": "90 minuta",
+    "120MIN": "120 minuta",
+    "UPDATELOCALE": "Sacuvaj promjene",
+    "CHANGES": "Promjena informacija lokala",
+    "LOGO": "Promijeni logo"
+
+  }
+
+}
+
+
+

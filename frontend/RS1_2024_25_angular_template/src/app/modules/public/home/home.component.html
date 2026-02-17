@@ -1,0 +1,69 @@
+<app-sidebar></app-sidebar>
+<div class="page-container">
+  <div class="content-container">
+    <!-- Hero section -->
+    <div class="hero-section animate-fadeIn">
+      <h1 class="hero-title">Discover Local Businesses</h1>
+      <p class="hero-subtitle">Explore top-rated local spots and find your next favorite place.</p>
+    </div>
+
+    <!-- Loading state -->
+    <div *ngIf="isLoading" class="loading-container">
+      <div class="spinner"></div>
+      <p class="loading-text">Loading amazing places...</p>
+    </div>
+
+    <!-- Categories -->
+    <div *ngIf="!isLoading">
+      <div *ngFor="let category of categories" class="category-container animate-fadeIn">
+        <div class="category-header">
+          <div class="category-indicator"></div>
+          <h2 class="category-title">
+            Top picks in <span class="category-highlight">{{ category.name }}</span>
+          </h2>
+        </div>
+
+        <div *ngIf="category.locales.length === 0" class="empty-state">
+          <p>No locales found for this category.</p>
+        </div>
+
+        <div *ngIf="category.locales.length > 0" class="carousel-wrapper">
+          <button class="nav-button nav-prev" [disabled]="category.currentIndex <= 0" (click)="scrollLeft(category)">
+            ❮
+          </button>
+
+          <div class="carousel-container">
+            <div class="carousel-track" [style.transform]="getTransform(category)">
+              <div *ngFor="let locale of category.locales" class="locale-card">
+                <div class="card-image-container"  [routerLink]="['/public/locale', locale.localeId]">
+                  <img [src]="locale.logo || 'assets/no-image.png'" [alt]="locale.name" class="locale-image">
+                  <div *ngIf="locale.averageRating" class="rating-badge">
+                    {{ locale.averageRating.toFixed(1) }} ★
+                  </div>
+                </div>
+                <div class="card-header">
+                  <h3 class="locale-name">{{ locale.name }}</h3>
+                </div>
+                <div class="card-content">
+                  <p class="locale-city">{{ locale.cityName }}</p>
+                </div>
+                <div class="card-footer">
+                  <a class="view-details-btn" [routerLink]="['/public/locale', locale.localeId]">
+                    View details <span class="arrow-icon">→</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button class="nav-button nav-next"
+                  [disabled]="category.currentIndex + 3 >= category.locales.length"
+                  (click)="scrollRight(category)">
+            ❯
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

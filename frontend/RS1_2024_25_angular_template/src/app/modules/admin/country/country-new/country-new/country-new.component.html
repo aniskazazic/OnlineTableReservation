@@ -1,0 +1,30 @@
+<app-admin-sidebar></app-admin-sidebar>
+
+<div class="wrapper">
+  <h2 class="title">Add new Country</h2>
+
+  <div class="card">
+    <div *ngIf="successMsg" class="alert success">{{ successMsg }}</div>
+    <div *ngIf="errorMsg" class="alert error">{{ errorMsg }}</div>
+
+    <div class="form-row">
+      <label for="name">Country Name:</label>
+      <input
+        id="name"
+        type="text"
+        [(ngModel)]="name"
+        placeholder="e.g. Bosnia and Herzegovina"
+        [disabled]="loading"
+      />
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" (click)="save()" [disabled]="loading">
+        {{ loading ? 'Saving...' : 'Save Changes' }}
+      </button>
+      <button class="btn btn-secondary" type="button" (click)="cancel()" [disabled]="loading">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

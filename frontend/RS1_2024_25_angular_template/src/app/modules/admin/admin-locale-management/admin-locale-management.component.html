@@ -1,0 +1,82 @@
+<app-admin-sidebar></app-admin-sidebar>
+<div class="user-table">
+  <div class="dashboard-container">
+    <div class="dashboard-header">
+      <h1>Locale Managment</h1>
+      <p class="description">View and manage Loacles</p>
+    </div>
+    <input class="user-input" (keyup)="applyFilter($event)" matInput placeholder="Search locales">
+
+    <div style="display: flex; align-items: center; gap: 8px; margin-left: 12px;">
+      <input class="user-checkbox" type="checkbox" [(ngModel)]="loadDeleted" (change)="cb()" id="deletedToggle">
+      <label for="deletedToggle">Show deleted</label>
+    </div>
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th><th>Name</th><th>Country</th><th>City</th><th>Address</th><th>Category</th><th>Status</th><th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let locale of locales; let i = index">
+        <td>{{ locale.id }}</td>
+
+        <td *ngIf="!editRow[i]">{{ locale.localeName }} </td>
+        <td *ngIf="editRow[i]">
+          <input [(ngModel)]="locale.localeName" placeholder="First Name" />
+        </td>
+
+        <td *ngIf="!editRow[i]">{{ locale.country }}</td>
+        <td *ngIf="editRow[i]">
+          <select [(ngModel)]="locale.countryId" (change)="onCountryChange(locale.countryId, i)">
+            <option *ngFor="let country of Country" [value]="country.id">
+              {{ country.name }}
+            </option>
+          </select>
+        </td>
+
+        <td *ngIf="!editRow[i]">{{ locale.city }}</td>
+        <td *ngIf="editRow[i]">
+          <select [(ngModel)]="locale.cityId">
+            <option *ngFor="let city of CitiesPerRow[i]" [value]="city.id">
+              {{ city.name }}
+            </option>
+          </select>
+        </td>
+
+        <td *ngIf="!editRow[i]">{{ locale.address }}</td>
+        <td *ngIf="editRow[i]"><input  class="mail"  [(ngModel)]="locale.address" /></td>
+
+        <td *ngIf="!editRow[i]">{{ locale.category }}</td>
+        <td *ngIf="editRow[i]">
+          <select [(ngModel)]="locale.categoryId">
+            <option *ngFor="let cat of Category" [value]="cat.id">
+              {{ cat.name }}
+            </option>
+          </select>
+        </td>
+        <td>
+          <span [ngClass]="locale.isDeleted ? 'status-inactive' : 'status-active'">
+            {{ locale.isDeleted ? 'Inactive' : 'Active' }}
+          </span>
+        </td>
+
+        <td>
+          <button *ngIf="!editRow[i]" (click)="editRow[i] = true">✏️</button>
+          <button *ngIf="editRow[i]" (click)="saveLocale(locale, i)">💾</button>
+          <button (click)="deleteOrReactivate(locale)">
+            {{ locale.isDeleted ? '♻️' : '🗑️' }}
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <button (click)="prevPage()" [disabled]="page === 1">‹</button>
+      <span>Page {{ page }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="page === totalPages">›</button>
+    </div>
+  </div>
+</div>
+

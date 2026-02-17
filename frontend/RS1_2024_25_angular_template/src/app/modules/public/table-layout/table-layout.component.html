@@ -1,0 +1,137 @@
+  <!-- Modal overlay -->
+  <app-sidebar></app-sidebar>
+
+
+  <!-- Dashboard Header -->
+  <div class="dashboard-container">
+    <header class="dashboard-header">
+      <div class="header-content">
+        <div class="header-title-container">
+          <h1 *ngIf="isOwner" class="header-title">Restaurant Owner Dashboard</h1>
+          <h1 *ngIf="!isOwner" class="header-title">Restaurant Worker Dashboard</h1>
+          <p class="header-subtitle">Manage your reservations, tables, and staff</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Tabs -->
+    <main class="dashboard-main">
+      <div class="tabs-container">
+        <div class="tabs-border">
+          <nav class="tabs-nav">
+            <button *ngIf="authService.getMyAuthInfo()?.isOwner" class="tab-button" (click)="toOverview()">Overview</button>
+            <button class="tab-button" (click)="toLocaleReservations()">Reservations</button>
+            <button  class="tab-button tab-active">Tables</button>
+            <button *ngIf="authService.getMyAuthInfo()?.isOwner" class="tab-button" (click)="toWorkers()" >Workers</button>
+            <button *ngIf="authService.getMyAuthInfo()?.isOwner" class="tab-button" (click)="toSettings()">Settings</button>
+          </nav>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div *ngIf="isZoneModalVisible || isTableModalVisible || confirmModal" class="modal-overlay"></div>
+
+  <!-- Container for tables -->
+  <div class="center-wrapper">
+    <div #box class="example-boundary">
+      <!-- Loop through tables and render each as an SVG -->
+      <div
+        class="resizable-table"
+        *ngFor="let table of tables; let i = index"
+        cdkDrag
+        [cdkDragBoundary]="'.example-boundary'"
+        [style.left.px]="table.xCoordinate"
+        [style.top.px]="table.yCoordinate"
+        (dblclick)="editTable(i)"
+        (cdkDragEnded)="onDrop($event, $event.source.element.nativeElement, i)">
+        <div>
+          <img *ngIf="tables[i].numberOfGuests===2" src="images/2Seat.png" style="width: 100%; height: 100%; object-fit: contain;" />
+          <img *ngIf="tables[i].numberOfGuests===3" src="images/3Seat.png" style="width: 100%; height: 100%; object-fit: contain;" />
+          <img *ngIf="tables[i].numberOfGuests===4" src="images/4Seat.png" style="width: 100%; height: 100%; object-fit: contain;" />
+          <img *ngIf="tables[i].numberOfGuests===5" src="images/5Seat.png" style="width: 100%; height: 100%; object-fit: contain;" />
+          <img *ngIf="tables[i].numberOfGuests===6" src="images/6Seat.png" style="width: 100%; height: 100%; object-fit: contain;" />
+          <img *ngIf="tables[i].numberOfGuests===7" src="images/7Seat.png" style="width: 100%; height: 100%; object-fit: contain;" />
+          <img *ngIf="tables[i].numberOfGuests===8" src="images/8Seat.png" style="width: 100%; height: 100%; object-fit: contain;" />
+        </div>
+      </div>
+
+      <div
+        *ngFor="let zone of zones; let i = index"
+        class="zone-box"
+        [style.left.px]="zone.xCoordinate"
+        [style.top.px]="zone.yCoordinate"
+        [style.width.px]="zone.width"
+        [style.height.px]="zone.height"
+        cdkDrag
+        [cdkDragBoundary]="'.example-boundary'"
+        (cdkDragEnded)="onDropZone($event, $event.source.element.nativeElement, i)"
+        (dblclick)="editZone(i)">
+        {{ zone.name }}
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button (click)="addNewTable()">Add New Table</button>
+      <button (click)="addNewZone()">Add New Zone</button>
+      <button (click)="ConfirmModal()">Save Layout</button>
+    </div>
+  </div>
+
+  <!-- Confirm modal -->
+  <div *ngIf="confirmModal" class="zone-modal">
+    <h3>Save Layout</h3>
+    <p>Are you sure you want to save the current layout?</p>
+
+    <div class="buttons-group">
+      <button (click)="saveLayout()">Save</button>
+      <button (click)="confirmModal = false">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Zone modal -->
+  <div *ngIf="isZoneModalVisible" class="zone-modal">
+    <h3>{{ isEditingZone ? 'Edit Zone' : 'Add New Zone' }}</h3>
+
+    <label>
+      Name
+      <input [(ngModel)]="newZone.name" placeholder="Zone name" />
+    </label>
+
+    <label>
+      Width
+      <input type="number" step="10" [(ngModel)]="newZone.width" placeholder="Width" />
+    </label>
+
+    <label>
+      Height
+      <input type="number" step="10" [(ngModel)]="newZone.height" placeholder="Height" />
+    </label>
+
+    <div class="buttons-group">
+      <button (click)="saveZone()">Save</button>
+      <button (click)="isZoneModalVisible = false">Cancel</button>
+      <button *ngIf="isEditingZone" (click)="deleteZone()">Delete</button>
+    </div>
+  </div>
+
+  <!-- Table modal -->
+  <div *ngIf="isTableModalVisible" class="zone-modal">
+    <h3>{{ isEditingTable ? 'Edit Table' : 'Add New Table' }}</h3>
+
+    <label>
+      Name
+      <input [(ngModel)]="newTable.name" placeholder="Table name" />
+    </label>
+
+    <label>
+      Number of Guests
+      <input type="number" min="1" max="8" [(ngModel)]="newTable.numberOfGuests" placeholder="Number of guests" />
+    </label>
+
+    <div class="buttons-group">
+      <button (click)="saveTable()">Save</button>
+      <button (click)="isTableModalVisible = false">Cancel</button>
+      <button *ngIf="isEditingTable" (click)="deleteTable()">Delete</button>
+    </div>
+  </div>

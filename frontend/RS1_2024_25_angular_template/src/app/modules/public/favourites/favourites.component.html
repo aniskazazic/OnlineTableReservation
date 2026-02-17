@@ -1,0 +1,41 @@
+<app-sidebar></app-sidebar>
+<div class="All">
+
+  <div class="favourites-container">
+
+    <label class="title">Vaši Favoriti</label>
+    <div *ngIf="favourites.length === 0" class="empty-state">
+      <p>No favourites found.</p>
+    </div>
+    <div  *ngFor="let fav of favourites" class="favourite-card" (dblclick)="navigate(fav.localeId)" >
+
+      <div  class="card-left">
+        <img [src]="fav.localeLogo" alt="{{ fav.localeName }}" class="locale-image" />
+        <div class="locale-info">
+          <h3>{{ fav.localeName }}</h3>
+          <p>{{ fav.localeAddress }}</p>
+          <p class="working-hours">
+            {{ fav.startOfWorkingHours  }} - {{ fav.endOfWorkingHours  }}
+          </p>
+        </div>
+      </div>
+      <div class="card-right">
+        <button (click)="promptRemove(fav.localeId)" class="remove-btn">Ukloni</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Confirm Modal -->
+<div class="modal-backdrop" *ngIf="showModal===true">
+  <div class="modal">
+    <h3>Ukloniti lokal iz omiljenih?</h3>
+    <p>Da li ste sigurni da želite ukloniti ovaj lokal iz omiljenih?</p>
+    <div class="modal-buttons">
+      <button class="confirm-btn" (click)="confirmRemove()">Da</button>
+      <button class="cancel-btn" (click)="cancelRemove()">Ne</button>
+    </div>
+  </div>
+</div>
+

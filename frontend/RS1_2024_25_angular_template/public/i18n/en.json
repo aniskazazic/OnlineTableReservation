@@ -1,0 +1,176 @@
+{
+  "SELECT": {
+    "LAN": "Select language"
+  },
+
+
+  "LANGUAGE": {
+    "ENGLISH": "English"
+  },
+
+  "LOGINREGISTER": {
+    "TITLE": "Online Table Reservation",
+    "MESSAGE": "Please login or register to continue",
+    "BUTTON": "Login",
+    "PORUKA_REG": "Don't have an account yet?",
+    "BUTTON_REG": "Register"
+  },
+
+  "LOGIN": {
+    "USERNAME": "Username",
+    "TITLE": "Login",
+    "PASSWORD": "Password",
+    "BUTTON": "Login",
+    "PORUKA_REG": "Don't have an account yet?",
+    "BUTTON_REG": "Register",
+    "ERROR": "Invalid username or password"
+  },
+
+  "REGISTER": {
+    "TITLE": "Registration",
+    "STEP1": {
+      "FIRST_NAME": "First Name",
+      "LAST_NAME": "Last Name"
+    },
+    "STEP2": {
+      "USERNAME": "Username",
+      "EMAIL": "Email Address"
+    },
+    "STEP3": {
+      "PASSWORD": "Password",
+      "CONFIRM_PASSWORD": "Confirm Password"
+    },
+    "VALIDATION_ERRORS": {
+      "REQUIRED_FIRST_NAME": "First name is required.",
+      "REQUIRED_LAST_NAME": "Last name is required.",
+      "REQUIRED_USERNAME": "Username is required.",
+      "REQUIRED_EMAIL": "Email address is required.",
+      "INVALID_EMAIL": "Invalid email address.",
+      "REQUIRED_PASSWORD": "Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and a special character.",
+      "PASSWORD_MISMATCH": "Passwords do not match.",
+      "GENERAL_ERROR": "An error occurred during registration."
+    },
+    "BUTTONS": {
+      "PREVIOUS": "Previous",
+      "NEXT": "Next",
+      "SUBMIT": "Submit"
+    },
+    "ALREADY_HAVE_ACCOUNT": "Already have an account?",
+    "LOGIN_LINK": "Login"
+  },
+
+  "LOCALE_DETAILS": {
+    "CITY": "City",
+    "OWNER": "Owner",
+    "WORKING_HOURS": "Working Hours",
+    "RATING": "Rating",
+    "UPDATE": "Update",
+    "DELETE": "Delete",
+    "ADDRESS": "Address",
+    "BUTTON": "Show my location and route",
+    "LOCATION": "Location",
+    "DESCRIPTION": "Description",
+    "ADDTOGALLERY" : "Add to gallery",
+    "BOOKATABLE" : "Book a table",
+    "GALLERY": {
+      "GALLERY": "Gallery",
+      "NO_IMAGES":"No images available",
+      "SHOW": "View the entire gallery",
+      "ADD": "Add to gallery"
+    }
+  },
+
+  "REVIEW": {
+    "LEAVE_REVIEW": "Leave a Review",
+    "RATING": "Rating",
+    "SUBMIT_REVIEW": "Submit Review",
+    "REVIEWS": "Reviews",
+    "EDIT_REVIEW": "Edit Review",
+    "SAVE": "Save",
+    "CANCEL": "Cancel",
+    "DELETE": "Delete",
+    "ALRIGHT": "Okay",
+    "WARN": "Warning !",
+    "YES": "Yes",
+    "NO": "No",
+    "CONFIRM_DELETE": "Are you sure?",
+    "DELETE_CONFIRMATION": "Do you really want to delete this review?",
+    "ALREADY_REVIEWED": "You already left a review for this locale.",
+    "SORTBY" : "Sort by",
+    "MOSTLIKES" : "Most likes",
+    "MOSTDISLIKES" : "Most dislikes",
+    "HIGHESTRATING": "Highest Rating",
+    "LOWESTRATING" : "Lowest Rating",
+    "LATEST" : "Latest",
+    "EARLIEST" : "Earliest"
+  },
+
+  "LOADING": "Loading...",
+
+  "SHOWINGREWIEWS": "Showing reviwes",
+
+  "ADMINWELCOME": {
+  "TITLE": "Restaurant Admin Portal",
+  "WELCOME": "Welcome to the admin dashboard. Access analytics, manage users and locales.",
+  "ENTER_ADMIN": "Enter Admin Dashboard",
+  "ENTER_HOME": "Enter Home Page"
+},
+
+  "WORKERWELCOME" : {
+    "TITLE": "Restaurant Worker Portal",
+    "WELCOME": "Welcome to the worker dashboard. Access reservations, manage tables and more",
+    "ENTER_WORKER": "Enter Worker Dashboard",
+    "ENTER_HOME": "Enter Home Page"
+  },
+
+  "ADMIN_DASHBOARD": {
+    "TITLE": "Dashboard",
+    "SUBTITLE": "Welcome to the admin dashboard",
+    "TOTAL_USERS": "Total Users",
+    "TOTAL_USERS_DESC": "Total registered users",
+    "ACTIVE_USERS": "Active Users",
+    "ACTIVE_USERS_DESC": "Users active in last 30 days",
+    "DELETED_USERS": "Deleted Users",
+    "DELETED_USERS_DESC": "Total deleted user accounts",
+    "LOCALES": "Locales",
+    "LOCALES_DESC": "Total registered restaurants"
+  },
+  "ADDLOCALE": {
+    "NAME": "Name",
+    "LOGO": "Logo",
+    "CATEGORY": "Category",
+    "CITY": "City",
+    "ADDRESS": "Address",
+    "LENGTHOFRESERVATION": "Length of reservation time",
+    "STARTOFWORKINGHOURS": "Start of working hours",
+    "ENDOFWORKINGHOURS": "End of working hours",
+    "LOCALEADD": "Add locale",
+    "15MIN": "15 minutes",
+    "30MIN": "30 minutes",
+    "45MIN": "45 minutes",
+    "60MIN": "60 minutes",
+    "90MIN": "90 minutes",
+    "120MIN": "120 minutes"
+
+  },
+  "EDITLOCALE": {
+    "NAME": "Name",
+    "CATEGORY": "Category",
+    "CITY": "City",
+    "ADDRESS": "Address",
+    "LENGTHOFRESERVATION": "Length of reservation time",
+    "STARTOFWORKINGHOURS": "Start of working hours",
+    "ENDOFWORKINGHOURS": "End of working hours",
+    "15MIN": "15 minutes",
+    "30MIN": "30 minutes",
+    "45MIN": "45 minutes",
+    "60MIN": "60 minutes",
+    "90MIN": "90 minutes",
+    "120MIN": "120 minutes",
+    "UPDATELOCALE": "Save changes",
+    "CHANGES": "Changing informations for locale",
+    "LOGO": "Change logo"
+
+  }
+
+}

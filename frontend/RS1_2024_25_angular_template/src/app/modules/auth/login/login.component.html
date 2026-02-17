@@ -1,0 +1,36 @@
+<div class="language-selector">
+  <label for="language">{{ 'SELECT.LAN' | translate }}:</label>
+  <select id="language" (change)="changeLanguage($event)">
+    <option value="en" [selected]="currentLang === 'en'">{{ 'ENGLISH' | translate }}</option>
+    <option value="bs" [selected]="currentLang === 'bs'">{{ 'BOSNIAN' | translate }}</option>
+    <!-- Add more languages as needed -->
+  </select>
+</div>
+
+<div class="All">
+
+  <div class="login-container">
+    <h2>{{ 'LOGIN.TITLE' | translate }}</h2>
+
+    <form (ngSubmit)="onLogin()">
+      <div class="form-group">
+        <label for="username">{{ 'LOGIN.USERNAME' | translate }}:</label>
+        <input [(ngModel)]="loginRequest.username" id="username" name="username" required type="text">
+      </div>
+
+      <div class="form-group">
+        <label for="password">{{'LOGIN.PASSWORD' | translate }}:</label>
+        <input [(ngModel)]="loginRequest.password" id="password" name="password" required type="password">
+      </div>
+
+      <button class="login-button" type="submit">{{ 'LOGIN.BUTTON' | translate }}</button>
+
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    </form>
+
+    <p>{{'LOGIN.PORUKA_REG' | translate}} <span (click)="navigateTo('register')" class="auth-link">{{ 'LOGIN.BUTTON_REG' | translate}}</span></p>
+  </div>
+</div>
+
+
+

@@ -1,0 +1,345 @@
+<!-- Language Selector -->
+<app-sidebar></app-sidebar>
+<div class="All">
+<div class="language-selector">
+  <label for="language">{{ 'SELECT.LAN' | translate }}:</label>
+  <select id="language" (change)="changeLanguage($event)">
+    <option value="en" [selected]="currentLang === 'en'">{{ 'ENGLISH' | translate }}</option>
+    <option value="bs" [selected]="currentLang === 'bs'">{{ 'BOSNIAN' | translate }}</option>
+  </select>
+</div>
+
+<div *ngIf="isLoading" class="loading-spinner">{{ 'LOADING' | translate }}</div>
+
+<!-- Restaurant Gallery -->
+<div class="restaurant-gallery">
+  <div class="gallery-grid">
+    <!-- Loop through images -->
+    <div *ngFor="let image of imageGallery.slice(0, 3); let i = index"
+         [ngClass]="{'gallery-item': true, 'gallery-item-main': i === 0}"
+         (click)="openFullGalleryModal()">
+      <img [src]="image.url" [alt]="'Restaurant view ' + (i+1)" class="gallery-image">
+    </div>
+  </div>
+
+  <button class="gallery-more-btn" *ngIf="imageGallery.length > 3" (click)="openFullGalleryModal()">
+    <span class="gallery-icon"></span>
+    <span>+ {{ imageGallery.length - 3 }} more</span>
+  </button>
+</div>
+
+<!-- Restaurant Header -->
+<div class="restaurant-header" *ngIf="!isLoading && localeDetails">
+  <div class="logo-container">
+    <img [src]="localeDetails.logo" [alt]="localeDetails.name" class="restaurant-logo" (click)="openModal()">
+  </div>
+  <div class="restaurant-info">
+    <h1 class="restaurant-name">{{ localeDetails.name }}</h1>
+    <div class="restaurant-meta">
+      <span class="restaurant-city">{{ localeDetails.cityName }}</span>
+      <span class="separator">•</span>
+      <div class="rating-stars">
+        <!-- Stars based on rating -->
+        <svg *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+             class="star-icon"
+             viewBox="0 0 24 24"
+             [ngClass]="{
+               'filled': i + 1 <= Math.floor(averageRating),
+               'half-filled': i + 1 > Math.floor(averageRating) && i < averageRating
+             }">
+          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+        </svg>
+        <span class="rating-value">{{ averageRating.toFixed(1) }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="restaurant-actions">
+    <button class="btn-book" (click)="goToReservation()">{{  'LOCALE_DETAILS.BOOKATABLE' | translate }}</button>
+    <button class="btn-gallery" (click)="openFullGalleryModal()">{{ 'LOCALE_DETAILS.GALLERY.GALLERY' | translate  }}</button>
+    <button *ngIf="this.isOwner" class="btn-gallery" (click)="addToGallery()">{{ 'LOCALE_DETAILS.ADDTOGALLERY' | translate  }}</button>
+    <button class="btn-favorite" [ngClass]="{'active': isFavourited}" (click)="toggleFavourite()">
+      <svg class="heart-icon" viewBox="0 0 24 24">
+        <path [attr.fill]="isFavourited ? '#ef4444' : 'none'"
+              d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+              [attr.stroke]="isFavourited ? '#ef4444' : 'currentColor'"></path>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<!-- Restaurant Info -->
+<div class="restaurant-details" *ngIf="!isLoading && localeDetails">
+  <div class="description-section">
+    <h3 class="section-title">{{ 'LOCALE_DETAILS.DESCRIPTION' | translate }}:</h3>
+    <p class="description-text">{{ localeDetails.description }}</p>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <h4 class="info-title">{{ 'LOCALE_DETAILS.WORKING_HOURS' | translate }}:</h4>
+      <p class="info-text">{{ localeDetails.startOfWorkingHours }} - {{ localeDetails.endOfWorkingHours }}</p>
+    </div>
+
+    <div class="info-card">
+      <h4 class="info-title">{{ 'LOCALE_DETAILS.ADDRESS' | translate }}:</h4>
+      <a  target="_blank" rel="noopener noreferrer" >{{ localeDetails.address }}</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- Restaurant Map -->
+<div class="map-section">
+  <h3 class="section-title">{{ 'LOCALE_DETAILS.LOCATION' | translate }}:</h3>
+  <div class="map-container" id="map"></div>
+
+  <button class="route-btn" (click)="showUserLocation()">
+    <svg class="pin-icon" viewBox="0 0 24 24">
+      <path d="M12 10c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm0-5c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm3 5.5h-6c-1.1 0-2 .9-2 2V16h2v7h1.5v-5h1v5H13v-7h2v-3.5c0-1.1-.9-2-2-2z"></path>
+    </svg>
+    {{ 'LOCALE_DETAILS.BUTTON' | translate }}
+  </button>
+
+
+</div>
+
+<!-- Restaurant Reviews -->
+<div class="reviews-section">
+  <h3 class="reviews-title">{{ 'REVIEW.REVIEWS' | translate }}</h3>
+
+  <div class="sort-dropdown">
+    <label for="sortReviews">{{ 'REVIEW.SORTBY' | translate }}:</label>
+    <select id="sortReviews" [(ngModel)]="selectedSort" (change)="onSortChange()">
+      <option value="mostLikes">{{ 'REVIEW.MOSTLIKES' | translate }}</option>
+      <option value="mostDislikes">{{ 'REVIEW.MOSTDISLIKES' | translate }}</option>
+      <option value="highestRating">{{ 'REVIEW.HIGHESTRATING' | translate }}</option>
+      <option value="lowestRating">{{ 'REVIEW.LOWESTRATING' | translate }}</option>
+      <option value="latest">{{ 'REVIEW.LATEST' | translate }}</option>
+      <option value="earliest">{{ 'REVIEW.EARLIEST' | translate }}</option>
+    </select>
+  </div>
+
+
+  <!-- Review stats -->
+  <div class="stats-container" *ngIf="ratingCounts">
+    <div class="rating-header">
+      <div class="average-rating">{{ averageRating.toFixed(1) }}</div>
+      <div class="rating-summary">
+        <div class="stars-container">
+          <!-- Stars based on average rating -->
+          <svg *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+               class="star-icon"
+               viewBox="0 0 24 24"
+               [ngClass]="{
+                 'filled': i + 1 <= Math.floor(averageRating),
+                 'half-filled': i + 1 > Math.floor(averageRating) && i < averageRating
+               }">
+            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+          </svg>
+        </div>
+        <div class="reviews-count">{{ 'Based on' | translate }} {{ totalReviews }} {{ 'reviews' | translate }}</div>
+      </div>
+    </div>
+
+    <div class="rating-bars">
+      <div class="rating-bar-row" *ngFor="let ratingcategory of ratingCategories">
+        <span class="rating-label">{{ ratingcategory.label }}</span>
+        <div class="rating-bar-container">
+          <div class="rating-bar"
+               [style.width.%]="getBarWidth(ratingcategory.key)"
+               [style.background]="ratingcategory.color">
+          </div>
+        </div>
+        <span class="rating-count"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add review form -->
+  <div class="review-form" *ngIf="!hasUserReviewed">
+    <h4 class="form-title">{{ 'REVIEW.LEAVE_REVIEW' | translate }}</h4>
+    <div class="rating-input">
+      <!-- Stars for rating input -->
+      <svg *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+           class="star-input"
+           [ngClass]="{'active': i < rating}"
+           (click)="setRating(i + 1)"
+           viewBox="0 0 24 24">
+        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+      </svg>
+    </div>
+    <textarea [(ngModel)]="newReview" placeholder="{{ 'REVIEW.LEAVE_REVIEW' | translate }}" class="review-textarea"></textarea>
+    <button class="submit-review" (click)="addReview()">{{ 'REVIEW.SUBMIT_REVIEW' | translate }}</button>
+  </div>
+
+  <!-- Review list -->
+  <div class="reviews-list">
+    <!-- Prikaz ukupnog broja revija i trenutnog prikaza -->
+    <div class="reviews-summary" *ngIf="totalReviews > 0">
+      {{ 'SHOWINGREWIEWS' | translate }} {{ (currentPage - 1) * pageSize + 1 }}-{{ Math.min(currentPage * pageSize, totalReviews) }} of {{ totalReviews }}
+    </div>
+
+    <div *ngFor="let review of reviews" class="review-item">
+      <div class="review-header">
+        <h5 class="reviewer-name">{{ review.user.firstName }} {{ review.user.lastName }}</h5>
+
+      </div>
+
+      <p *ngIf="!review.isEditing" class="review-text">{{ review.description }}</p>
+      <textarea *ngIf="review.isEditing" [(ngModel)]="review.tempDescription" class="review-textarea"></textarea>
+
+      <div class="review-rating">
+        <!-- Stars for regular view -->
+        <div class="stars" *ngIf="!review.isEditing">
+          <svg *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+               class="star-icon-small"
+               viewBox="0 0 24 24"
+               [ngClass]="{'filled': i < review.rating}">
+            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+          </svg>
+        </div>
+
+        <!-- Stars for editing -->
+        <div class="rating-container" *ngIf="review.isEditing">
+          <label>{{ 'REVIEW.EDIT_REVIEW' | translate }}:</label>
+          <div class="stars">
+            <span
+              *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+              class="star"
+              [class.filled]="review.tempRating !== undefined && i < review.tempRating"
+              (click)="setTempRating(review, i + 1)">
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reactions -->
+      <div *ngIf="this.user?.personID !== review.user.id" class="reaction-buttons">
+        <button
+          class="reaction-button like"
+          (click)="reactToReview(review, true)">
+          👍 {{ review.likeCount || 0 }}
+        </button>
+        <button
+          class="reaction-button dislike"
+          (click)="reactToReview(review, false)">
+          👎 {{ review.dislikeCount || 0 }}
+        </button>
+      </div>
+
+      <!-- Edit/Delete actions -->
+      <div class="review-actions" *ngIf="this.user?.personID === review.user.id">
+        <button *ngIf="!review.isEditing" (click)="startEdit(review)" class="edit-btn">{{ 'REVIEW.EDIT_REVIEW' | translate }}</button>
+        <button *ngIf="review.isEditing" (click)="saveReview(review)" class="save-btn">{{ 'REVIEW.SAVE' | translate }}</button>
+        <button *ngIf="review.isEditing" (click)="cancelEdit(review)" class="cancel-btn">{{ 'REVIEW.CANCEL' | translate }}</button>
+        <button (click)="confirmDeleteReview(review.id)" class="delete-btn">{{ 'REVIEW.DELETE' | translate }}</button>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination-container" *ngIf="totalReviews > pageSize">
+      <div class="pagination-controls">
+        <div class="page-numbers">
+          <button class="page-number" (click)="currentPage = currentPage - 1; fetchReviews()" [disabled]="currentPage <= 1">Previous</button>
+          <button class="page-number" (click)="currentPage = currentPage + 1; fetchReviews()" [disabled]="currentPage >= Math.ceil(totalReviews / pageSize)">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Confirmation Message Box for Deleting a Review -->
+<div *ngIf="showDeleteConfirmation" class="message-box-overlay">
+  <div class="message-box">
+    <h3>{{ 'REVIEW.CONFIRM_DELETE' | translate }}</h3>
+    <p>{{ 'REVIEW.DELETE_CONFIRMATION' | translate }}</p>
+    <button (click)="deleteReviewConfirmed()" class="yes-btn">{{ 'REVIEW.YES' | translate }}</button>
+    <button (click)="closeMessageBox()" class="no-btn">{{ 'REVIEW.NO' | translate }}</button>
+  </div>
+</div>
+
+<!-- Modal for logo -->
+<div *ngIf="isModalOpen" class="modal-overlay" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <img
+      [src]="localeDetails.logo"
+      alt="Logo"
+      [style.transition]="'transform 0.3s ease'"
+      [style.cursor]="isZoomed ? 'zoom-out' : 'zoom-in'"
+    />
+    <button (click)="closeModal()" class="close-btn">×</button>
+
+  </div>
+</div>
+
+<!-- Image Zoom Modal -->
+<div *ngIf="isImageModalOpen" class="modal-overlay" (click)="closeImageModal()">
+  <div class="modal-content zoom-modal-content" (click)="$event.stopPropagation()">
+    <div class="image-container" [style.transform]="zoomStyle" [style.transition]="'transform 0.3s ease'">
+      <img
+        [src]="selectedImage?.url"
+        (click)="zoomIn()"
+        [style.cursor]="isZoomed ? 'zoom-out' : 'zoom-in'"
+      />
+      <button (click)="closeImageModal(); $event.stopPropagation()" class="close-btn">×</button>
+      <button *ngIf="isOwner" (click)="deleteImageForLocale()" class="delete-image-btn"> 🗑️ </button>
+    </div>
+
+    <div class="modal-footer">
+      <button *ngIf="currentImageIndex > 0"
+              (click)="navigateToPrevImage(); $event.stopPropagation()"
+              class="nav-arrow prev-arrow">
+        ‹
+      </button>
+
+      <div class="image-counter">
+        {{ currentImageIndex + 1 }} / {{ imageGallery.length }}
+      </div>
+
+      <button *ngIf="currentImageIndex < imageGallery.length - 1"
+              (click)="navigateToNextImage(); $event.stopPropagation()"
+              class="nav-arrow next-arrow">
+        ›
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Full Gallery Modal -->
+  <div *ngIf="isFullGalleryModalOpen" @fadeInOut class="modal-overlay">
+    <div class="modal-content full-gallery-content" (click)="$event.stopPropagation()" @scaleInOut>
+      <button (click)="closeFullGalleryModal()" class="close-btn">×</button>
+      <div class="full-gallery">
+        <img *ngFor="let image of imageGallery; let i = index"
+             [src]="image.url"
+             class="full-gallery-img"
+             (click)="openImageFromGallery(image, i)"
+        />
+      </div>
+    </div>
+  </div>
+
+<!-- Modal za dodavanje slika -->
+<div *ngIf="isAddModalOpen" class="modal-overlay" (click)="closeAddModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h3>Dodaj novu sliku u galeriju</h3>
+
+    <!-- Forma za upload slike -->
+    <input type="file" (change)="onImageUpload($event)" accept="image/*" class="file-input" />
+
+    <!-- Pregled slike pre upload-a -->
+    <div *ngIf="previewImage" class="image-preview">
+      <img [src]="previewImage" alt="Preview" class="preview-img" />
+      <button (click)="clearPreview()" class="clear-preview-btn">X</button>
+    </div>
+
+    <!-- Dugme za upload -->
+    <button (click)="uploadImage()" class="upload-btn" [disabled]="!previewImage">Upload Sliku</button>
+
+    <!-- Zatvori dugme -->
+    <button (click)="closeAddModal()" class="close-btn">X</button>
+  </div>
+</div>
+
+</div>

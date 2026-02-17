@@ -1,0 +1,98 @@
+<div class="language-selector">
+  <label for="language">{{ 'SELECT.LAN' | translate }}:</label>
+  <select id="language" (change)="changeLanguage($event)">
+    <option value="en" [selected]="currentLang === 'en'">{{ 'ENGLISH' | translate }}</option>
+    <option value="bs" [selected]="currentLang === 'bs'">{{ 'BOSNIAN' | translate }}</option>
+  </select>
+</div>
+
+
+
+<div class="locale-form-container">
+  <form (ngSubmit)="onSubmit()">
+    <div class="full-width">
+      <label for="name">{{ 'ADDLOCALE.NAME' | translate }}:</label>
+      <input id="name" [(ngModel)]="localeRequest.name" name="name" required />
+    </div>
+
+
+    <div class="full-width logo-container">
+      <div>
+        <label for="logo">{{ 'ADDLOCALE.LOGO' | translate }}:</label>
+        <input type="file" id="logo" (change)="onFileSelect($event)" />
+      </div>
+      <div class="logo-preview" *ngIf="logoPreview">
+        <img [src]="logoPreview" alt="Logo Preview" />
+      </div>
+    </div>
+
+    <div>
+      <label for="categoryId">{{ 'ADDLOCALE.CATEGORY' | translate }}:</label>
+      <select id="categoryId" [(ngModel)]="localeRequest.categoryId" name="categoryId" required>
+        <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="cityId">{{ 'ADDLOCALE.CITY' | translate }}:</label>
+      <select id="cityId" [(ngModel)]="localeRequest.cityId" name="cityId" required>
+        <option *ngFor="let city of cities" [value]="city.id">{{ city.name }}</option>
+      </select>
+    </div>
+
+    <div class="full-width">
+      <label for="address">{{ 'ADDLOCALE.ADDRESS' | translate }}:</label>
+      <input id="address" [(ngModel)]="localeRequest.address" name="address" required />
+    </div>
+
+    <div class="form-group full-width">
+      <label for="lengthOfReservation">{{ 'ADDLOCALE.LENGTHOFRESERVATION' | translate }}:</label>
+      <select
+        id="lengthOfReservation"
+        name="lengthOfReservation"
+        [(ngModel)]="localeRequest.lengthOfReservation"
+        class="form-control"
+        required
+      >
+        <option [value]="0.25">{{ 'ADDLOCALE.15MIN' | translate }}</option>
+        <option [value]="0.5">{{ 'ADDLOCALE.30MIN' | translate }}</option>
+        <option [value]="0.75">{{ 'ADDLOCALE.45MIN' | translate }}</option>
+        <option [value]="1">{{ 'ADDLOCALE.60MIN' | translate }}</option>
+        <option [value]="1.5">{{ 'ADDLOCALE.90MIN' | translate }}</option>
+        <option [value]="2">{{ 'ADDLOCALE.120MIN' | translate }}</option>
+      </select>
+    </div>
+
+
+    <div>
+      <label for="startOfWorkingHours">{{ 'ADDLOCALE.STARTOFWORKINGHOURS' | translate }}:</label>
+      <input
+        type="time"
+        id="startOfWorkingHours"
+        name="startOfWorkingHours"
+        (change)="onTimeChange('startOfWorkingHours', $event)" required />
+    </div>
+
+    <div>
+      <label for="endOfWorkingHours">{{ 'ADDLOCALE.ENDOFWORKINGHOURS' | translate }}:</label>
+      <input
+        type="time"
+        id="endOfWorkingHours"
+        name="endOfWorkingHours"
+        (change)="onTimeChange('endOfWorkingHours', $event)" required />
+    </div>
+
+<!--    <div class="full-width">-->
+<!--      <label for="ownerId">Owner ID</label>-->
+<!--      <input id="ownerId" [(ngModel)]="localeRequest.ownerId" name="ownerId" />-->
+<!--    </div>-->
+
+    <div *ngIf="validationErrors.length > 0" class="errors full-width">
+      <p *ngFor="let error of validationErrors">{{ error }}</p>
+    </div>
+
+    <div class="full-width">
+      <button type="submit">{{ 'ADDLOCALE.LOCALEADD' | translate }}</button>
+    </div>
+  </form>
+</div>

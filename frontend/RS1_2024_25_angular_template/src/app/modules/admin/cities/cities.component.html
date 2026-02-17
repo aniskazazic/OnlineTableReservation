@@ -1,0 +1,29 @@
+
+<app-admin-sidebar></app-admin-sidebar>
+<div class="All">
+<h2 class="section-title">City Management</h2>
+
+<button routerLink="./new" class="btn btn-primary">New city</button>
+
+<table class="city-table">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Country Name</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let city of cities">
+    <td>{{ city.id }}</td>
+    <td>{{ city.name }}</td>
+    <td>{{ city.countryName }}</td>
+    <td>
+      <button class="btn btn-edit" (click)="editCity(city.id)">Edit</button>
+      <button class="btn btn-delete" (click)="deleteCity(city.id)">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</div>

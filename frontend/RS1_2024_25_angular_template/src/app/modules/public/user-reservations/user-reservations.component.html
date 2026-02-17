@@ -1,0 +1,55 @@
+<app-sidebar></app-sidebar>
+<div class="reservation-container">
+  <h1 class="title">My Reservations</h1>
+
+  <div class="reservation-tabs">
+    <div class="tabs-list">
+      <button
+        class="tab-button"
+        [class.active]="activeTab === 'active'"
+        (click)="switchTab('active')">
+        Active Reservations
+      </button>
+      <button
+        class="tab-button"
+        [class.active]="activeTab === 'past'"
+        (click)="switchTab('past')">
+        Past Reservations
+      </button>
+    </div>
+  </div>
+
+  <div class="reservations-list">
+    <div *ngIf="reservations.length === 0" class="empty-state">
+      <p>No reservations found.</p>
+    </div>
+
+    <div *ngFor="let reservation of reservations" class="reservation-card">
+      <div class="card-left">
+        <div class="locale-image-container">
+          <img [src]="reservation.localeLogo" [alt]="reservation.localeName" class="locale-image">
+        </div>
+        <div class="locale-info">
+          <h3 class="locale-name">{{ reservation.localeName }}</h3>
+          <p class="locale-address">{{ reservation.localeAdress }}</p>
+        </div>
+      </div>
+
+      <div class="reservation-details">
+        <p><span class="label">Table:</span> {{ reservation.tableName }}</p>
+        <p><span class="label">Date:</span> {{ reservation.reservationDate | date:'dd.MM.yyyy' }}</p>
+        <p><span class="label">People:</span> {{ reservation.numberOfGuests }}</p>
+        <p><span class="label">Time:</span> {{ reservation.startTime }} - {{ reservation.endTime }}</p>
+      </div>
+
+      <div class="card-actions">
+        <button
+          *ngIf="activeTab === 'active'"
+          class="cancel-button"
+          (click)="cancelReservation(reservation.id)">
+          Cancel Reservation
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

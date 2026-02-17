@@ -1,0 +1,115 @@
+<div class="language-selector">
+  <label for="language">{{ 'SELECT.LAN' | translate }}:</label>
+  <select id="language" (change)="changeLanguage($event)">
+    <option value="en" [selected]="currentLang === 'en'">{{ 'LANGUAGE.ENGLISH' | translate }}</option>
+    <option value="bs" [selected]="currentLang === 'bs'">{{ 'LANGUAGE.BOSNIAN' | translate }}</option>
+  </select>
+</div>
+
+<div class="All-Register">
+  <div class="register-container">
+    <h2>{{ 'REGISTER.TITLE' | translate }}</h2>
+
+    <div *ngIf="currentStep === 1">
+      <label>{{ 'REGISTER.STEP1.FIRST_NAME' | translate }}:</label>
+      <input type="text" [(ngModel)]="registerRequest.firstName" />
+      <label>{{ 'REGISTER.STEP1.LAST_NAME' | translate }}:</label>
+      <input type="text" [(ngModel)]="registerRequest.lastName" />
+    </div>
+
+    <div *ngIf="currentStep === 2">
+      <label>{{ 'REGISTER.STEP2.USERNAME' | translate }}:</label>
+      <input type="text" [(ngModel)]="registerRequest.username" />
+      <label>{{ 'REGISTER.STEP2.EMAIL' | translate }}:</label>
+      <input type="email" [(ngModel)]="registerRequest.email" />
+    </div>
+
+    <div class="step" *ngIf="currentStep === 3">
+      <label>{{ 'REGISTER.STEP3.PASSWORD' | translate }}:</label>
+      <div class="password-wrapper">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          [(ngModel)]="registerRequest.password"
+          (input)="checkPasswordStrength()"
+          placeholder="{{ 'REGISTER.STEP3.PASSWORD' | translate }}"
+        />
+        <i
+          class="toggle-icon"
+          [class.fas]="true"
+          [class.fa-eye]="!showPassword"
+          [class.fa-eye-slash]="showPassword"
+          (click)="togglePasswordVisibility()"
+        ></i>
+
+      </div>
+
+
+      <!-- Strength meter -->
+      <div *ngIf="registerRequest.password.length>0" class="strength-meter">
+        <div class="strength-bar" [ngClass]="passwordStrengthClass"></div>
+      </div>
+
+      <p class="strength-text">{{ passwordStrengthText }}</p>
+      <label>{{ 'REGISTER.STEP3.CONFIRM_PASSWORD' | translate }}:</label>
+      <div class="password-wrapper">
+        <input
+          [type]="showConfirmPassword ? 'text' : 'password'"
+          [(ngModel)]="registerRequest.confirmPassword"
+          placeholder="{{ 'REGISTER.STEP3.CONFIRM_PASSWORD' | translate }}"
+        />
+        <i
+          class="toggle-icon"
+          [class.fas]="true"
+          [class.fa-eye]="!showConfirmPassword"
+          [class.fa-eye-slash]="showConfirmPassword"
+          (click)="toggleConfirmPasswordVisibility()"
+        ></i>
+      </div>
+
+
+      <div class="owner-checkbox">
+        <input id="isOwner" type="checkbox" [(ngModel)]="registerRequest.isOwner" (change)="onOwnerToggle()" />
+        <label for="isOwner">Register as owner</label>
+      </div>
+
+    </div>
+    
+
+    <div *ngIf="currentStep === 4 && registerRequest.isOwner">
+      <label>Phone Number:</label>
+      <input type="text" [(ngModel)]="registerRequest.phoneNumber" />
+
+      <label>Birthdate:</label>
+      <input type="date" [(ngModel)]="registerRequest.birthDate" />
+    </div>
+
+
+    <div *ngIf="validationErrors.length > 0">
+      <ul>
+        <li *ngFor="let error of validationErrors">{{ error }}</li>
+      </ul>
+    </div>
+
+
+    <div class="buttons">
+      <button class="button1" (click)="previousStep()" [disabled]="currentStep === 1">
+        {{ 'REGISTER.BUTTONS.PREVIOUS' | translate }}
+      </button>
+      <button class="button2" (click)="nextStep()" [disabled]="currentStep === totalSteps">
+        {{ 'REGISTER.BUTTONS.NEXT' | translate }}
+      </button>
+      <button class="button3" (click)="onSubmit()" [disabled]="currentStep !== totalSteps">
+        {{ 'REGISTER.BUTTONS.SUBMIT' | translate }}
+      </button>
+    </div>
+
+
+
+    <p>
+      {{ 'REGISTER.ALREADY_HAVE_ACCOUNT' | translate }}
+      <span (click)="navigateTo('login')" class="auth-link">
+        {{ 'REGISTER.LOGIN_LINK' | translate }}
+      </span>
+    </p>
+  </div>
+</div>

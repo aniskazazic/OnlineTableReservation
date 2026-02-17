@@ -1,0 +1,99 @@
+<app-sidebar></app-sidebar>
+
+<div class="page-container">
+  <div class="content-container">
+
+    <div class="locale-form-container">
+      <form (submit)="$event.preventDefault()">
+        <div class="full-width">
+          <label for="q">Type in the name of the restaurant</label>
+          <input
+            id="q"
+            type="text"
+            placeholder="What are you looking for…"
+            [formControl]="$any(form.get('q'))"
+            aria-label="Search locales"
+          />
+        </div>
+
+        <div>
+          <label for="country">Country</label>
+          <select
+            id="country"
+            [formControl]="$any(form.get('countryName'))"
+            aria-label="Država"
+          >
+            <option value="">All countries</option>
+            <option *ngFor="let c of countries" [value]="c.name">{{ c.name }}</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="city">City</label>
+          <select
+            id="city"
+            [formControl]="$any(form.get('cityName'))"
+            [disabled]="!citiesFiltered.length"
+            aria-label="Grad"
+          >
+            <option value="">All cities</option>
+            <option *ngFor="let g of citiesFiltered" [value]="g.name">{{ g.name }}</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="category">Category</label>
+          <select
+            id="category"
+            [formControl]="$any(form.get('categoryId'))"
+            aria-label="Kategorija"
+          >
+            <option [ngValue]="null">All categories</option>
+            <option *ngFor="let k of categories" [ngValue]="k.id">{{ k.name }}</option>
+          </select>
+        </div>
+
+        <div>
+          <label style="opacity:0"> </label>
+          <button type="button" (click)="resetFilters()">Reset</button>
+        </div>
+      </form>
+    </div>
+
+    <div *ngIf="loading" class="loading-container">
+      <div class="spinner"></div>
+      <p class="loading-text">Searching…</p>
+    </div>
+
+    <ng-container *ngIf="!loading && (locales$ | async) as locales">
+      <div *ngIf="!locales.length" class="empty-state">
+        <p>No locales match your filters.</p>
+      </div>
+
+      <div *ngIf="locales.length" class="cards-grid">
+        <div class="locale-card" *ngFor="let locale of locales; trackBy: trackByLocaleId">
+          <div class="card-image-container" [routerLink]="['/public/locale', locale.localeId]">
+            <img
+              [src]="locale.logo || 'assets/no-image.png'"
+              [alt]="locale.name"
+              class="locale-image"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="card-header">
+            <h3 class="locale-name">{{ locale.name }}</h3>
+          </div>
+          <div class="card-content">
+            <p class="locale-city">{{ locale.cityName }}</p>
+          </div>
+          <div class="card-footer">
+            <a class="view-details-btn" [routerLink]="['/public/locale', locale.localeId]">
+              View details <span class="arrow-icon">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

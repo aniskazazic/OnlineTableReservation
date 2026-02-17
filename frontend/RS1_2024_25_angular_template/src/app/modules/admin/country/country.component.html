@@ -1,0 +1,31 @@
+<app-admin-sidebar></app-admin-sidebar>
+
+<div class="All">
+  <h2 class="section-title">Country Management</h2>
+
+  <button class="btn btn-primary" (click)="newCountry()">New country</button>
+
+  <table class="country-table" *ngIf="countries?.length">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th class="actions-col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let country of countries">
+      <td>{{ country.id }}</td>
+      <td>{{ country.name }}</td>
+      <td>
+        <button class="btn btn-edit" (click)="editCountry(country.id)">Edit</button>
+        <button class="btn btn-delete" (click)="deleteCountry(country.id)">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="empty" *ngIf="!loading && !countries?.length">
+    No countries found.
+  </div>
+</div>

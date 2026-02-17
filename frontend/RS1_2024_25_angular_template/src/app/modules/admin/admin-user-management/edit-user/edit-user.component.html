@@ -1,0 +1,27 @@
+<div class="container">
+  <h2>Edit User</h2>
+  <form (ngSubmit)="updateUser()">
+    <div>
+      <label for="userName">Username:</label>
+      <input id="userName" [(ngModel)]="user.username" name="userName" required />
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input id="email" [(ngModel)]="user.email" name="email" type="email" required />
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input id="password" [(ngModel)]="user.password" name="password" type="password" />
+    </div>
+    <div>
+      <label for="firstName">First Name:</label>
+      <input id="firstName" [(ngModel)]="user.firstName" name="firstName" required />
+    </div>
+    <div>
+      <label for="lastName">Last Name:</label>
+      <input id="lastName" [(ngModel)]="user.lastName" name="lastName" required />
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+    <button type="button" (click)="router.navigate(['/admin/user'])" class="btn btn-secondary">Cancel</button>
+  </form>
+</div>

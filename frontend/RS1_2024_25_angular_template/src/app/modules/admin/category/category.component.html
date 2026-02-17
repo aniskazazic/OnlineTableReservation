@@ -1,0 +1,28 @@
+<app-admin-sidebar></app-admin-sidebar>
+<div class="All">
+  <h2 class="section-title">Category Management</h2>
+
+  <button routerLink="./new" class="btn btn-primary">New category</button>
+
+  <table class="city-table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let category of categories">
+      <td>{{ category.id }}</td>
+      <td>{{ category.name }}</td>
+      <td>{{ category.description }}</td>
+      <td>
+        <button class="btn btn-edit" (click)="editCategory(category.id)">Edit</button>
+        <button class="btn btn-delete" (click)="deleteCategory(category.id)">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

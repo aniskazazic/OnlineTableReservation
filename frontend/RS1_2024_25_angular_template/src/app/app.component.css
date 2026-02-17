@@ -1,0 +1,71 @@
+/* General Reset */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* App Container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Fix for full viewport height */
+  width: 100vw; /* Fix for full viewport width */
+  justify-content: space-between;
+}
+
+/* Header
+.app-header {
+  background-color: rgba(0, 123, 255, 0.8);
+  color: #fff;
+  padding: 1rem 2rem;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+ */
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+/* Main Content */
+.app-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover; /* Ensure image covers the entire area */
+  width: 100%; /* Cover full width */
+}
+
+/* Form Container */
+.form-container {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+}
+
+/* Footer */
+.app-footer {
+  background-color: rgba(248, 249, 250, 0.9);
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #555;
+  border-top: 1px solid #ddd;
+}
+
+.app-footer p {
+  margin: 0;
+}

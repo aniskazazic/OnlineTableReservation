@@ -1,0 +1,136 @@
+<app-sidebar></app-sidebar>
+<div class="All">
+
+<div class="settings-container">
+  <div class="settings-header-bar">
+    <button class="back-button">
+      <!-- Ikona strelice lijevo -->
+      <svg routerLink="/public/home" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      <span class="visually-hidden">Natrag</span>
+    </button>
+    <h1>Postavke</h1>
+  </div>
+
+  <div class="tabs-container">
+    <div class="tabs-header">
+      <button class="tab-button" routerLink="/user/settings">Postavke</button>
+      <button class="tab-button active">Uredi profil</button>
+    </div>
+
+
+    <div class="tab-content">
+      <div class="settings-card">
+        <div class="settings-card-header">
+          <h2>Osobne informacije</h2>
+          <p>Uredite svoje osobne podatke</p>
+        </div>
+
+        <div class="settings-card-content">
+          <div class="user-avatar-container">
+            <div class="user-avatar">
+              <!-- Ikona korisnika -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </div>
+            <button class="avatar-edit-button">
+              <!-- Ikona uređivanja -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+            </button>
+          </div>
+
+          <form [formGroup]="form" (ngSubmit)="saveChanges()" novalidate>
+
+
+              <div class="form-group">
+                <label for="firstName">Ime</label>
+                <input id="firstName" formControlName="firstName" />
+                <div class="error" *ngIf="form.get('firstName')?.touched && form.get('firstName')?.invalid">
+                  Ime je obavezno.
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="lastName">Prezime</label>
+                <input id="lastName" formControlName="lastName" />
+                <div class="error" *ngIf="form.get('lastName')?.touched && form.get('lastName')?.invalid">
+                  Prezime je obavezno.
+                </div>
+              </div>
+
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input id="email" formControlName="email" />
+              <div class="error" *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+                <span *ngIf="form.get('email')?.errors?.['required']">Email je obavezan.</span>
+                <span *ngIf="form.get('email')?.errors?.['email']">Neispravan email format.</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="username">Korisničko ime</label>
+              <input id="username" formControlName="username" />
+              <div class="error" *ngIf="form.get('username')?.touched && form.get('username')?.invalid">
+                Korisničko ime je obavezno.
+              </div>
+            </div>
+
+
+            <div class="info-message" *ngIf="message"
+                 [ngClass]="{'success-message': message.includes('Uspješno'), 'error-message': !message.includes('Uspješno')}"> {{ message }}
+            </div>
+
+            <div class="settings-card-footer">
+              <button type="submit" class="btn-primary" >Spremi promjene</button>
+            </div>
+
+
+          </form>
+
+
+          <div class="settings-card-footer">
+            <button (click)="openPasswordModal()" class="btn-primary" >Promjena lozinke</button>
+          </div>
+
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- Modal -->
+<div class="password-modal-backdrop" *ngIf="showPasswordModal">
+  <div class="password-modal">
+    <h2 class="password-modal-title">Promjena lozinke</h2>
+
+    <div class="password-input-group">
+      <label>Stara lozinka</label>
+      <input type="password" [(ngModel)]="oldPassword" />
+    </div>
+
+    <div class="password-input-group">
+      <label>Nova lozinka</label>
+      <input type="password" [(ngModel)]="newPassword" />
+    </div>
+
+    <div class="password-input-group">
+      <label>Potvrda nove lozinke</label>
+      <input type="password" [(ngModel)]="confirmNewPassword" />
+    </div>
+
+    <div class="password-error" *ngIf="passwordError">{{ passwordError }}</div>
+    <div class="password-success" *ngIf="passwordMessage">{{ passwordMessage }}</div>
+
+    <div class="password-modal-actions">
+      <button class="btn-secondary" (click)="closePasswordModal()">Odustani</button>
+      <button class="btn-primary" (click)="changePassword()">Spremi</button>
+    </div>
+  </div>
+</div>
+
