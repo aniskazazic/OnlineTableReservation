@@ -59,7 +59,7 @@ Admins can:
    ```powershell
    update-database
 3. Start the backend project
-4. Call the controller /DataSeedGenerateEndpoint/data-seed using Swaggerž
+4. Call the controller /DataSeedGenerateEndpoint using Swagger
 5. Go to the Frontend folder and execute:
     ```bash
    npm install
